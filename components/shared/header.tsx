@@ -19,19 +19,19 @@ export default function Header({ className }: IProps) {
           <Image src="/logo.png" alt="Logo" width={35} height={35} />
 
           <div>
-            <h1 className="text-2xl font-black uppercase">Next Pizza</h1>
+            <h1 className="text-2xl font-black uppercase">Chess Pizza</h1>
 
-            <p className="text-sm leading-3 text-gray-400">вкусней уже некуда</p>
+            <p className="text-sm leading-3 text-gray-400">смачніше вже нікуди</p>
           </div>
         </div>
 
         <div className="flex items-center gap-3">
           <Button variant="outline" className="flex items-center gap-1">
             <User size={16} />
-            Войти
+            Увійти
           </Button>
 
-          <Button className="group relative cursor-pointer">
+          <Button className="group relative">
             <b>520 ₴</b>
 
             <span className="mx-3 h-full w-px bg-white/30" />

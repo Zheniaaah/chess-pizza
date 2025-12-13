@@ -4,6 +4,6 @@ export * from './dialog';
 export * from './drawer';
 export * from './input';
 export * from './popover';
+export * from './range-slider';
 export * from './select';
 export * from './skeleton';
-export * from './slider';

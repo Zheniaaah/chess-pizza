@@ -3,6 +3,7 @@ import nextVitals from 'eslint-config-next/core-web-vitals';
 import nextTs from 'eslint-config-next/typescript';
 import prettierConfig from 'eslint-config-prettier';
 import prettierPlugin from 'eslint-plugin-prettier';
+import reactCompiler from 'eslint-plugin-react-compiler';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 
 const eslintConfig = defineConfig([
@@ -11,9 +12,11 @@ const eslintConfig = defineConfig([
   {
     plugins: {
       'simple-import-sort': simpleImportSort,
+      'react-compiler': reactCompiler,
     },
     rules: {
       'simple-import-sort/imports': 'error',
+      'react-compiler/react-compiler': 'error',
     },
   },
   {

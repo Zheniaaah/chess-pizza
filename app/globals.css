@@ -60,6 +60,32 @@
   --radius: 18px;
 }
 
+@layer utilities {
+  .scrollbar {
+    /* Поддержка Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+
+    &::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+      border-radius: 6px;
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: var(--muted-foreground);
+    }
+  }
+}
 
 @layer base {
   * {
