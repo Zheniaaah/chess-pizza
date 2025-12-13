@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { Checkbox } from '@/components/ui';
+import { Checkbox as CheckboxShadcn } from '@/components/ui';
 
-export interface IFilterCheckboxProps {
+export interface ICheckboxProps {
   label: string;
   value: string;
   name?: string;
@@ -11,17 +11,17 @@ export interface IFilterCheckboxProps {
   endAdornment?: React.ReactNode;
 }
 
-export default function FilterCheckbox({
+export default function Checkbox({
   label,
   value,
   name,
   checked,
   onCheckedChange,
   endAdornment,
-}: IFilterCheckboxProps) {
+}: ICheckboxProps) {
   return (
     <div className="flex items-center space-x-2">
-      <Checkbox
+      <CheckboxShadcn
         onCheckedChange={onCheckedChange}
         checked={checked}
         value={value}

@@ -62,7 +62,6 @@
 
 @layer utilities {
   .scrollbar {
-    /* Поддержка Firefox */
     scrollbar-width: thin;
     scrollbar-color: var(--border) transparent;
 
@@ -91,7 +90,17 @@
   * {
     @apply border-border outline-ring/50;
   }
+
+  html {
+    scroll-behavior: smooth;
+
+    @media (prefers-reduced-motion: reduce) {
+      scroll-behavior: auto;
+    }
+  }
+
   body {
     @apply bg-background text-foreground;
+    @apply font-nunito antialiased;
   }
 }

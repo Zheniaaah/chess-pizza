@@ -2,21 +2,21 @@
 
 import React, { type ChangeEvent, useState } from 'react';
 
-import { FilterCheckbox, type IFilterCheckboxProps } from '@/components/shared';
+import { Checkbox, type ICheckboxProps } from '@/components/shared';
 import { Input } from '@/components/ui';
 
 interface IProps {
   title: string;
-  items: IFilterCheckboxProps[];
-  renderedItems: IFilterCheckboxProps[];
+  items: ICheckboxProps[];
+  renderedItems: ICheckboxProps[];
   limit?: number;
   searchInputPlaceholder?: string;
-  defaultValues?: IFilterCheckboxProps[];
-  onChange?: (values: IFilterCheckboxProps[]) => void;
+  defaultValues?: ICheckboxProps[];
+  onChange?: (values: ICheckboxProps[]) => void;
   className?: string;
 }
 
-export default function CheckboxFiltersGroup({
+export default function CheckboxesGroup({
   title,
   items,
   renderedItems,
@@ -54,7 +54,7 @@ export default function CheckboxFiltersGroup({
 
       <div className="scrollbar flex max-h-96 flex-col gap-4 overflow-auto pr-2">
         {list.map((item, index) => (
-          <FilterCheckbox
+          <Checkbox
             key={index}
             label={item.label}
             value={item.value}

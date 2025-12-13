@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { CheckboxFiltersGroup, FilterCheckbox } from '@/components/shared';
+import { Checkbox, CheckboxesGroup } from '@/components/shared';
 import { Input, RangeSlider } from '@/components/ui';
 
 import Title from './title';
@@ -95,9 +95,9 @@ export default function Filters({ className }: IProps) {
       </Title>
 
       <div className="flex flex-col gap-4">
-        <FilterCheckbox label="Можна сбирати" value="1" />
+        <Checkbox label="Можна сбирати" value="1" />
 
-        <FilterCheckbox label="Новинки" value="2" />
+        <Checkbox label="Новинки" value="2" />
       </div>
 
       <div className="mt-5 border-y border-y-neutral-100 py-6 pb-7">
@@ -111,7 +111,7 @@ export default function Filters({ className }: IProps) {
 
         <RangeSlider min={0} max={1000} step={10} value={[0, 1000]} />
 
-        <CheckboxFiltersGroup
+        <CheckboxesGroup
           title="Інгредієнти"
           items={ingredients}
           renderedItems={renderedIngredients}
