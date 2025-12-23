@@ -6,8 +6,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'dodobrands.io',
-        port: '',
+        hostname: 'images.weserv.nl',
         pathname: '/**',
       },
     ],
