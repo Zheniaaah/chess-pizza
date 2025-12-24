@@ -3,8 +3,8 @@
 import Link from 'next/link';
 import React from 'react';
 
-import { cn } from '@/lib';
 import { useCategoryStore } from '@/store';
+import { cn } from '@/utils';
 
 interface IProps {
   className?: string;

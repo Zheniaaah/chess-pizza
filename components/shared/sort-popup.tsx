@@ -1,7 +1,7 @@
 import { ArrowUpDown } from 'lucide-react';
 import React from 'react';
 
-import { cn } from '@/lib';
+import { cn } from '@/utils';
 
 interface IProps {
   className?: string;

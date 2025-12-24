@@ -4,8 +4,8 @@ import React, { useEffect, useRef } from 'react';
 import { useIntersection } from 'react-use';
 
 import { ProductCard, Title } from '@/components/shared';
-import { cn } from '@/lib';
 import { useCategoryStore } from '@/store';
+import { cn } from '@/utils';
 
 interface IProps {
   title: string;

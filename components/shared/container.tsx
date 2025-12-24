@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { cn } from '@/lib';
+import { cn } from '@/utils';
 
 interface IProps extends React.PropsWithChildren {
   className?: string;

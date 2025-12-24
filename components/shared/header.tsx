@@ -3,7 +3,7 @@ import Image from 'next/image';
 import React from 'react';
 
 import { Button } from '@/components/ui';
-import { cn } from '@/lib';
+import { cn } from '@/utils';
 
 import Container from './container';
 

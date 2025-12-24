@@ -6,79 +6,92 @@ export default function Home() {
       id: 1,
       name: 'Гавайська',
       price: 399,
-      imageUrl: 'https://dodobrands.io/img/webp/pizza-dodomix.webp',
+      imageUrl:
+        'https://images.weserv.nl/?url=media.dodostatic.net/image/r:584x584/11EE7D61706D472F9A5D71EB94149304.webp',
     },
     {
       id: 2,
       name: 'Гавайська',
       price: 399,
-      imageUrl: 'https://dodobrands.io/img/webp/pizza-dodomix.webp',
+      imageUrl:
+        'https://images.weserv.nl/?url=media.dodostatic.net/image/r:584x584/11EE7D61706D472F9A5D71EB94149304.webp',
     },
     {
       id: 3,
       name: 'Гавайська',
       price: 399,
-      imageUrl: 'https://dodobrands.io/img/webp/pizza-dodomix.webp',
+      imageUrl:
+        'https://images.weserv.nl/?url=media.dodostatic.net/image/r:584x584/11EE7D61706D472F9A5D71EB94149304.webp',
     },
     {
       id: 4,
       name: 'Гавайська',
       price: 399,
-      imageUrl: 'https://dodobrands.io/img/webp/pizza-dodomix.webp',
+      imageUrl:
+        'https://images.weserv.nl/?url=media.dodostatic.net/image/r:584x584/11EE7D61706D472F9A5D71EB94149304.webp',
     },
     {
       id: 5,
       name: 'Гавайська',
       price: 399,
-      imageUrl: 'https://dodobrands.io/img/webp/pizza-dodomix.webp',
+      imageUrl:
+        'https://images.weserv.nl/?url=media.dodostatic.net/image/r:584x584/11EE7D61706D472F9A5D71EB94149304.webp',
     },
     {
       id: 6,
       name: 'Гавайська',
       price: 399,
-      imageUrl: 'https://dodobrands.io/img/webp/pizza-dodomix.webp',
+      imageUrl:
+        'https://images.weserv.nl/?url=media.dodostatic.net/image/r:584x584/11EE7D61706D472F9A5D71EB94149304.webp',
     },
     {
       id: 7,
       name: 'Гавайська',
       price: 399,
-      imageUrl: 'https://dodobrands.io/img/webp/pizza-dodomix.webp',
+      imageUrl:
+        'https://images.weserv.nl/?url=media.dodostatic.net/image/r:584x584/11EE7D61706D472F9A5D71EB94149304.webp',
     },
     {
       id: 8,
       name: 'Гавайська',
       price: 399,
-      imageUrl: 'https://dodobrands.io/img/webp/pizza-dodomix.webp',
+      imageUrl:
+        'https://images.weserv.nl/?url=media.dodostatic.net/image/r:584x584/11EE7D61706D472F9A5D71EB94149304.webp',
     },
     {
       id: 9,
       name: 'Гавайська',
       price: 399,
-      imageUrl: 'https://dodobrands.io/img/webp/pizza-dodomix.webp',
+      imageUrl:
+        'https://images.weserv.nl/?url=media.dodostatic.net/image/r:584x584/11EE7D61706D472F9A5D71EB94149304.webp',
     },
     {
       id: 10,
       name: 'Гавайська',
       price: 399,
-      imageUrl: 'https://dodobrands.io/img/webp/pizza-dodomix.webp',
+      imageUrl:
+        'https://images.weserv.nl/?url=media.dodostatic.net/image/r:584x584/11EE7D61706D472F9A5D71EB94149304.webp',
     },
     {
       id: 11,
       name: 'Гавайська',
       price: 399,
-      imageUrl: 'https://dodobrands.io/img/webp/pizza-dodomix.webp',
+      imageUrl:
+        'https://images.weserv.nl/?url=media.dodostatic.net/image/r:584x584/11EE7D61706D472F9A5D71EB94149304.webp',
     },
     {
       id: 12,
       name: 'Гавайська',
       price: 399,
-      imageUrl: 'https://dodobrands.io/img/webp/pizza-dodomix.webp',
+      imageUrl:
+        'https://images.weserv.nl/?url=media.dodostatic.net/image/r:584x584/11EE7D61706D472F9A5D71EB94149304.webp',
     },
     {
       id: 13,
       name: 'Гавайська',
       price: 399,
-      imageUrl: 'https://dodobrands.io/img/webp/pizza-dodomix.webp',
+      imageUrl:
+        'https://images.weserv.nl/?url=media.dodostatic.net/image/r:584x584/11EE7D61706D472F9A5D71EB94149304.webp',
     },
   ];
 
