@@ -17,7 +17,7 @@ interface IProps {
 export default function ProductCard({ id, name, price, imageUrl, className }: IProps) {
   return (
     <div className={className}>
-      <Link href={`/product/${id}`}>
+      <Link href={`/products/${id}`}>
         <div className="bg-secondary flex h-[260px] items-center justify-center rounded-lg p-6">
           <Image width={215} height={215} src={imageUrl} alt={name} />
         </div>
