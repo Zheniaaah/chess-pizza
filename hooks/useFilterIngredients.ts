@@ -11,15 +11,15 @@ interface IIngredientItem {
 interface IReturn {
   ingredients: IIngredientItem[];
   loading: boolean;
-  selectedValues: Set<string>;
-  toggle: (value: string) => void;
+  selectedIngredients: Set<string>;
+  toggleIngredients: (value: string) => void;
 }
 
 export function useFilterIngredients(): IReturn {
   const [ingredients, setIngredients] = useState<IIngredientItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const [selectedValues, { toggle }] = useSet(new Set<string>([]));
+  const [selectedIngredients, { toggle: toggleIngredients }] = useSet(new Set<string>([]));
 
   useEffect(() => {
     (async () => {
@@ -41,5 +41,5 @@ export function useFilterIngredients(): IReturn {
     })();
   }, []);
 
-  return { ingredients, loading, selectedValues, toggle };
+  return { ingredients, loading, selectedIngredients, toggleIngredients };
 }

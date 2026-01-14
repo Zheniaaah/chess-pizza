@@ -1,8 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useSet } from 'react-use';
 
-import { Checkbox, CheckboxesGroup } from '@/components/shared';
+import { CheckboxesGroup } from '@/components/shared';
 import { Input, RangeSlider } from '@/components/ui';
 import { useFilterIngredients } from '@/hooks';
 
@@ -19,7 +20,9 @@ interface IPriceProps {
 
 export default function Filters({ className }: IProps) {
   const [{ priceFrom, priceTo }, setPrice] = useState<IPriceProps>({ priceFrom: 0, priceTo: 1000 });
-  const { ingredients, loading, selectedValues, toggle } = useFilterIngredients();
+  const [selectedSizes, { toggle: toggleSizes }] = useSet(new Set<string>([]));
+  const [selectedDough, { toggle: toggleDough }] = useSet(new Set<string>([]));
+  const { ingredients, loading, selectedIngredients, toggleIngredients } = useFilterIngredients();
 
   const updatePrice = (key: keyof IPriceProps, value: number) => {
     setPrice((prev) => ({
@@ -34,11 +37,30 @@ export default function Filters({ className }: IProps) {
         Фільтрація
       </Title>
 
-      <div className="mt-5 flex flex-col gap-4">
-        <Checkbox value="1" label="Можна сбирати" name="qwe" />
+      <CheckboxesGroup
+        title="Тісто"
+        items={[
+          { value: 'thin', label: 'Тонке' },
+          { value: 'traditional', label: 'Традиційне' },
+        ]}
+        name="dough"
+        selectedValues={selectedDough}
+        onCheckboxClick={toggleDough}
+        className="mt-5"
+      />
 
-        <Checkbox value="2" label="Новинки" name="ewq" />
-      </div>
+      <CheckboxesGroup
+        title="Розміри"
+        items={[
+          { value: '20', label: '20см' },
+          { value: '30', label: '30см' },
+          { value: '40', label: '40см' },
+        ]}
+        name="sizes"
+        selectedValues={selectedSizes}
+        onCheckboxClick={toggleSizes}
+        className="mt-5"
+      />
 
       <div className="mt-5 border-y border-y-neutral-100 py-6">
         <p className="mb-3 font-bold">Ціна від і до:</p>
@@ -77,12 +99,11 @@ export default function Filters({ className }: IProps) {
       <CheckboxesGroup
         title="Інгредієнти"
         items={ingredients}
-        renderedItems={ingredients}
         limit={6}
         name="ingredients"
         loading={loading}
-        selectedValues={selectedValues}
-        onCheckboxClick={toggle}
+        selectedValues={selectedIngredients}
+        onCheckboxClick={toggleIngredients}
         className="mt-5"
       />
     </div>

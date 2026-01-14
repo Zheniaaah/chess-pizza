@@ -8,7 +8,6 @@ import { Input, Skeleton } from '@/components/ui';
 interface IProps {
   title: string;
   items: ICheckboxProps[];
-  renderedItems: ICheckboxProps[];
   limit?: number;
   name?: string;
   loading?: boolean;
@@ -21,7 +20,6 @@ interface IProps {
 export default function CheckboxesGroup({
   title,
   items,
-  renderedItems,
   limit = 5,
   name,
   loading,
@@ -35,7 +33,7 @@ export default function CheckboxesGroup({
 
   const list = showAll
     ? items.filter((item) => item.label.toLowerCase().includes(searchValue.toLowerCase()))
-    : renderedItems.slice(0, limit);
+    : items.slice(0, limit);
 
   const onChangeSearchInput = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
