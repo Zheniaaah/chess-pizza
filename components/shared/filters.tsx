@@ -1,7 +1,10 @@
+'use client';
+
 import React from 'react';
 
 import { Checkbox, CheckboxesGroup } from '@/components/shared';
 import { Input, RangeSlider } from '@/components/ui';
+import { useFilterIngredients } from '@/hooks';
 
 import Title from './title';
 
@@ -10,116 +13,50 @@ interface IProps {
 }
 
 export default function Filters({ className }: IProps) {
-  const renderedIngredients = [
-    {
-      label: 'Сирний соус',
-      value: '1',
-    },
-    {
-      label: 'Моцарелла',
-      value: '2',
-    },
-    {
-      label: 'Часник',
-      value: '3',
-    },
-    {
-      label: 'Солені огірки',
-      value: '4',
-    },
-    {
-      label: 'Червона цибуля',
-      value: '5',
-    },
-    {
-      label: 'Томати',
-      value: '6',
-    },
-  ];
-
-  const ingredients = [
-    {
-      label: 'Сирний соус',
-      value: '1',
-    },
-    {
-      label: 'Моцарелла',
-      value: '2',
-    },
-    {
-      label: 'Часник',
-      value: '3',
-    },
-    {
-      label: 'Солені огірки',
-      value: '4',
-    },
-    {
-      label: 'Червона цибуля',
-      value: '5',
-    },
-    {
-      label: 'Томати',
-      value: '6',
-    },
-    {
-      label: 'Сирний соус',
-      value: '1',
-    },
-    {
-      label: 'Моцарелла',
-      value: '2',
-    },
-    {
-      label: 'Часник',
-      value: '3',
-    },
-    {
-      label: 'Солені огірки',
-      value: '4',
-    },
-    {
-      label: 'Червона цибуля',
-      value: '5',
-    },
-    {
-      label: 'Томати',
-      value: '6',
-    },
-  ];
+  const { ingredients, loading, selectedValues, toggle } = useFilterIngredients();
 
   return (
     <div className={className}>
-      <Title size="sm" className="mb-5 font-bold">
+      <Title size="sm" className="font-bold">
         Фільтрація
       </Title>
 
-      <div className="flex flex-col gap-4">
-        <Checkbox label="Можна сбирати" value="1" />
+      <div className="mt-5 flex flex-col gap-4">
+        <Checkbox value="1" label="Можна сбирати" name="qwe" />
 
-        <Checkbox label="Новинки" value="2" />
+        <Checkbox value="2" label="Новинки" name="ewq" />
       </div>
 
-      <div className="mt-5 border-y border-y-neutral-100 py-6 pb-7">
+      <div className="mt-5 border-y border-y-neutral-100 py-6">
         <p className="mb-3 font-bold">Ціна від і до:</p>
 
         <div className="mb-5 flex gap-3">
-          <Input type="number" placeholder="0" min={0} max={1000} defaultValue={0} />
+          <Input
+            type="number"
+            placeholder="0"
+            min={0}
+            max={1000}
+            defaultValue={0}
+            className="rounded-xl"
+          />
 
-          <Input type="number" placeholder="1000" min={100} max={1000} />
+          <Input type="number" placeholder="1000" min={100} max={1000} className="rounded-xl" />
         </div>
 
         <RangeSlider min={0} max={1000} step={10} value={[0, 1000]} />
-
-        <CheckboxesGroup
-          title="Інгредієнти"
-          items={ingredients}
-          renderedItems={renderedIngredients}
-          limit={6}
-          defaultValues={ingredients}
-          className="mt-5"
-        />
       </div>
+
+      <CheckboxesGroup
+        title="Інгредієнти"
+        items={ingredients}
+        renderedItems={ingredients}
+        limit={6}
+        name="ingredients"
+        loading={loading}
+        selectedValues={selectedValues}
+        onCheckboxClick={toggle}
+        className="mt-5"
+      />
     </div>
   );
 }

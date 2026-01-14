@@ -57,7 +57,7 @@
   --border: oklch(92% 0.006 59);
   --input: oklch(91% 0 0);
   --ring: oklch(70% 0.22 47);
-  --radius: 18px;
+  --radius: 8px;
 }
 
 @layer utilities {
@@ -102,5 +102,16 @@
   body {
     @apply bg-background text-foreground;
     @apply font-nunito antialiased;
+  }
+
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield; /* Firefox */
+    appearance: textfield;
   }
 }

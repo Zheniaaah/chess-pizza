@@ -34,12 +34,12 @@ export default function Header({ className }: IProps) {
         </div>
 
         <div className="flex items-center gap-3">
-          <Button variant="outline" className="flex items-center gap-1">
+          <Button variant="outline" className="flex items-center gap-1 rounded-2xl">
             <User size={16} />
             Увійти
           </Button>
 
-          <Button className="group relative">
+          <Button className="group relative rounded-2xl">
             <b>520 ₴</b>
 
             <span className="mx-3 h-full w-px bg-white/30" />

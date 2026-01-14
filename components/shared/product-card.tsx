@@ -18,7 +18,7 @@ export default function ProductCard({ id, name, price, imageUrl, className }: IP
   return (
     <div className={className}>
       <Link href={`/products/${id}`}>
-        <div className="bg-secondary flex h-[260px] items-center justify-center rounded-lg p-6">
+        <div className="bg-secondary flex h-[260px] items-center justify-center rounded-2xl p-6">
           <Image width={215} height={215} src={imageUrl} alt={name} />
         </div>
 
@@ -35,7 +35,7 @@ export default function ProductCard({ id, name, price, imageUrl, className }: IP
             від <b>{price}</b>
           </span>
 
-          <Button variant="secondary" className="text-base font-bold">
+          <Button variant="secondary" className="rounded-2xl text-base font-bold">
             <Plus size={20} className="mr-1" />
             Додати
           </Button>

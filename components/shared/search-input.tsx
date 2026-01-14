@@ -24,8 +24,13 @@ export default function SearchInput({ className }: IProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useDebounce(
-    () => {
-      api.products.search(searchQuery).then((products: Product[]) => setProducts(products));
+    async () => {
+      try {
+        const response = await api.products.search(searchQuery);
+        setProducts(response);
+      } catch (e) {
+        console.error(e);
+      }
     },
     250,
     [searchQuery],
