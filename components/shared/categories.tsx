@@ -1,12 +1,12 @@
 'use client';
 
+import type { Category } from '@prisma/client';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import React from 'react';
 
 import { useCategoryStore } from '@/store';
 import { cn } from '@/utils';
-import type { Category } from '@prisma/client';
 
 interface IProps {
   categories: Category[];

@@ -2,10 +2,10 @@
 
 import React from 'react';
 
-import { CheckboxesGroup } from '@/components/shared';
 import { Input, RangeSlider } from '@/components/ui';
 import { useFilters, useIngredients, useQueryFilters } from '@/hooks';
 
+import CheckboxesGroup from './checkboxes-group';
 import Title from './title';
 
 interface IProps {

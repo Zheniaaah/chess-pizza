@@ -3,11 +3,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
-import { SearchInput } from '@/components/shared';
 import { Button } from '@/components/ui';
 import { cn } from '@/utils';
 
 import Container from './container';
+import SearchInput from './search-input';
 
 interface IProps {
   className?: string;

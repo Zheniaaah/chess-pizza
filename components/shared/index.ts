@@ -9,4 +9,4 @@ export { default as ProductCardsGroup } from './product-cards-group';
 export { default as SearchInput } from './search-input';
 export { default as SortPopup } from './sort-popup';
 export { default as Title } from './title';
-// export { default as TopBar } from './top-bar';
+export { default as TopBar } from './top-bar';

@@ -2,8 +2,9 @@
 
 import React, { type ChangeEvent, useState } from 'react';
 
-import { Checkbox, type ICheckboxProps } from '@/components/shared';
 import { Input, Skeleton } from '@/components/ui';
+
+import Checkbox, { type ICheckboxProps } from './checkbox';
 
 interface IProps {
   title: string;

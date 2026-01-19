@@ -1,10 +1,10 @@
 import clsx from 'clsx';
 import React from 'react';
 
-type TitleSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+type TTitleSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
 interface IProps extends React.PropsWithChildren {
-  size?: TitleSize;
+  size?: TTitleSize;
   className?: string;
 }
 

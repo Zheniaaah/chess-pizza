@@ -1,5 +1,4 @@
-import { Container, Filters, ProductCardsGroup, Title } from '@/components/shared';
-import TopBar from '@/components/shared/top-bar';
+import { Container, Filters, ProductCardsGroup, Title, TopBar } from '@/components/shared';
 import { prisma } from '@/lib';
 
 export default async function Home() {
