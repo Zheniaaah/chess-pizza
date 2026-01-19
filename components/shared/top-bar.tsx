@@ -1,17 +1,22 @@
+import type { Category } from '@prisma/client';
 import React from 'react';
 
-import { Categories, Container, SortPopup } from '@/components/shared';
 import { cn } from '@/utils';
 
+import Categories from './categories';
+import Container from './container';
+import SortPopup from './sort-popup';
+
 interface IProps {
+  categories: Category[];
   className?: string;
 }
 
-export default function TopBar({ className }: IProps) {
+export default async function TopBar({ categories, className }: IProps) {
   return (
     <div className={cn('sticky top-0 z-10 bg-white py-5 shadow-lg shadow-black/5', className)}>
       <Container className="flex items-center justify-between">
-        <Categories />
+        <Categories categories={categories} />
 
         <SortPopup />
       </Container>

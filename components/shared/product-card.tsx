@@ -32,7 +32,7 @@ export default function ProductCard({ id, name, price, imageUrl, className }: IP
 
         <div className="mt-4 flex items-center justify-between">
           <span className="text-xl">
-            від <b>{price}</b>
+            від <b>{price} ₴</b>
           </span>
 
           <Button variant="secondary" className="rounded-2xl text-base font-bold">

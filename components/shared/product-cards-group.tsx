@@ -4,13 +4,15 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useRef } from 'react';
 import { useIntersection } from 'react-use';
 
-import { ProductCard, Title } from '@/components/shared';
 import { useCategoryStore } from '@/store';
 import { cn } from '@/utils';
 
+import ProductCard from './product-card';
+import Title from './title';
+
 interface IProps {
   title: string;
-  items: any[];
+  products: any[];
   categoryId: number;
   className?: string;
   listClassName?: string;
@@ -18,7 +20,7 @@ interface IProps {
 
 export default function ProductCardsGroup({
   title,
-  items,
+  products,
   categoryId,
   listClassName,
   className,
@@ -30,7 +32,8 @@ export default function ProductCardsGroup({
   const intersectionRef = useRef<HTMLDivElement>(null!);
 
   const intersection = useIntersection(intersectionRef, {
-    threshold: 0.2,
+    threshold: 1,
+    rootMargin: '-120px 0px -85% 0px',
   });
 
   useEffect(() => {
@@ -53,19 +56,21 @@ export default function ProductCardsGroup({
   ]);
 
   return (
-    <div id={title} ref={intersectionRef} className={className}>
+    <div id={title} className={className}>
+      <div ref={intersectionRef} className="pointer-events-none absolute h-5 opacity-0" />
+
       <Title size="lg" className="mb-5 font-extrabold">
         {title}
       </Title>
 
       <div className={cn('grid grid-cols-3 gap-[50px]', listClassName)}>
-        {items.map((item, index) => (
+        {products.map((product, index) => (
           <ProductCard
             key={index}
-            id={item.id}
-            name={item.name}
-            price={item.price}
-            imageUrl={item.imageUrl}
+            id={product.id}
+            name={product.name}
+            price={product.variations[0].price}
+            imageUrl={product.imageUrl}
           />
         ))}
       </div>

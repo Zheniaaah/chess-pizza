@@ -1,8 +1,7 @@
 export { default as Categories } from './categories';
-export { default as Checkbox } from './checkbox';
+export { default as Checkbox, type ICheckboxProps } from './checkbox';
 export { default as CheckboxesGroup } from './checkboxes-group';
 export { default as Container } from './container';
-export * from './checkbox';
 export { default as Filters } from './filters';
 export { default as Header } from './header';
 export { default as ProductCard } from './product-card';
@@ -10,4 +9,4 @@ export { default as ProductCardsGroup } from './product-cards-group';
 export { default as SearchInput } from './search-input';
 export { default as SortPopup } from './sort-popup';
 export { default as Title } from './title';
-export { default as TopBar } from './top-bar';
+// export { default as TopBar } from './top-bar';
