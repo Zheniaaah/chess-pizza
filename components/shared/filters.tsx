@@ -1,11 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
-import { useSet } from 'react-use';
+import React from 'react';
 
 import { CheckboxesGroup } from '@/components/shared';
 import { Input, RangeSlider } from '@/components/ui';
-import { useFilterIngredients } from '@/hooks';
+import { useFilters, useIngredients, useQueryFilters } from '@/hooks';
 
 import Title from './title';
 
@@ -13,22 +12,24 @@ interface IProps {
   className?: string;
 }
 
-interface IPriceProps {
-  priceFrom: number;
-  priceTo: number;
-}
-
 export default function Filters({ className }: IProps) {
-  const [{ priceFrom, priceTo }, setPrice] = useState<IPriceProps>({ priceFrom: 0, priceTo: 1000 });
-  const [selectedSizes, { toggle: toggleSizes }] = useSet(new Set<string>([]));
-  const [selectedDough, { toggle: toggleDough }] = useSet(new Set<string>([]));
-  const { ingredients, loading, selectedIngredients, toggleIngredients } = useFilterIngredients();
+  const { ingredients, loading } = useIngredients();
+  const {
+    selectedDough,
+    toggleDough,
+    selectedSizes,
+    toggleSizes,
+    prices,
+    updatePrice,
+    selectedIngredients,
+    toggleIngredients,
+  } = useFilters();
 
-  const updatePrice = (key: keyof IPriceProps, value: number) => {
-    setPrice((prev) => ({
-      ...prev,
-      [key]: value,
-    }));
+  useQueryFilters({ selectedDough, selectedSizes, prices, selectedIngredients });
+
+  const setPrices = (prices: number[]) => {
+    updatePrice('priceFrom', prices[0]);
+    updatePrice('priceTo', prices[1]);
   };
 
   return (
@@ -71,7 +72,7 @@ export default function Filters({ className }: IProps) {
             placeholder="0"
             min={0}
             max={1000}
-            value={String(priceFrom)}
+            value={prices.priceFrom ?? 0}
             onChange={(e) => updatePrice('priceFrom', Number(e.target.value))}
             className="rounded-xl"
           />
@@ -81,7 +82,7 @@ export default function Filters({ className }: IProps) {
             placeholder="1000"
             min={100}
             max={1000}
-            value={String(priceTo)}
+            value={prices.priceTo ?? 1000}
             onChange={(e) => updatePrice('priceTo', Number(e.target.value))}
             className="rounded-xl"
           />
@@ -91,8 +92,8 @@ export default function Filters({ className }: IProps) {
           min={0}
           max={1000}
           step={10}
-          value={[priceFrom, priceTo]}
-          onValueChange={([priceFrom, priceTo]) => setPrice({ priceFrom, priceTo })}
+          value={[prices.priceFrom ?? 0, prices.priceTo ?? 1000]}
+          onValueChange={setPrices}
         />
       </div>
 

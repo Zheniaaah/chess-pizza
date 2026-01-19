@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useSet } from 'react-use';
 
 import { api } from '@/services';
 
@@ -11,15 +10,11 @@ interface IIngredientItem {
 interface IReturn {
   ingredients: IIngredientItem[];
   loading: boolean;
-  selectedIngredients: Set<string>;
-  toggleIngredients: (value: string) => void;
 }
 
-export function useFilterIngredients(): IReturn {
+export function useIngredients(): IReturn {
   const [ingredients, setIngredients] = useState<IIngredientItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-
-  const [selectedIngredients, { toggle: toggleIngredients }] = useSet(new Set<string>([]));
 
   useEffect(() => {
     (async () => {
@@ -41,5 +36,5 @@ export function useFilterIngredients(): IReturn {
     })();
   }, []);
 
-  return { ingredients, loading, selectedIngredients, toggleIngredients };
+  return { ingredients, loading };
 }

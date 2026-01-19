@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useRef } from 'react';
 import { useIntersection } from 'react-use';
 
@@ -22,6 +23,9 @@ export default function ProductCardsGroup({
   listClassName,
   className,
 }: IProps) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const activeCategoryId = useCategoryStore((state) => state.activeId);
   const setActiveCategoryId = useCategoryStore((state) => state.setActiveId);
   const intersectionRef = useRef<HTMLDivElement>(null!);
 
@@ -30,10 +34,23 @@ export default function ProductCardsGroup({
   });
 
   useEffect(() => {
-    if (intersection?.isIntersecting) {
+    if (intersection?.isIntersecting && activeCategoryId !== categoryId) {
       setActiveCategoryId(categoryId);
+
+      const queryString = searchParams.toString();
+      const url = queryString ? `/?${queryString}#${title}` : `/#${title}`;
+
+      router.replace(url, { scroll: false });
     }
-  }, [intersection?.isIntersecting, setActiveCategoryId, categoryId]);
+  }, [
+    intersection?.isIntersecting,
+    activeCategoryId,
+    setActiveCategoryId,
+    categoryId,
+    searchParams,
+    title,
+    router,
+  ]);
 
   return (
     <div id={title} ref={intersectionRef} className={className}>
