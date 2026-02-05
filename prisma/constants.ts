@@ -1,8 +1,6 @@
 import { UserRole } from '@prisma/client';
 import { hashSync } from 'bcrypt';
 
-import { prisma } from '@/lib';
-
 export const USERS = [
   {
     fullName: 'Користувач Тест',

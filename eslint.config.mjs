@@ -17,6 +17,7 @@ const eslintConfig = defineConfig([
     rules: {
       'simple-import-sort/imports': 'error',
       'react-compiler/react-compiler': 'error',
+      'react-hooks/set-state-in-effect': 'off',
     },
   },
   {

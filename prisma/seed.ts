@@ -1,4 +1,5 @@
 import { prisma } from '@/lib';
+
 import {
   CARTS,
   CATEGORIES,
@@ -6,7 +7,7 @@ import {
   OTHER_PRODUCTS,
   OTHER_PRODUCTS_VARIATIONS,
   USERS,
-} from '@/prisma';
+} from './constants';
 
 async function up() {
   await prisma.user.createMany({

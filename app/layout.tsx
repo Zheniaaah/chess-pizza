@@ -4,8 +4,6 @@ import type { Metadata } from 'next';
 import { Nunito } from 'next/font/google';
 import React from 'react';
 
-import { Header } from '@/components/shared';
-
 const nunito = Nunito({
   subsets: ['cyrillic'],
   variable: '--font-nunito',
@@ -13,7 +11,10 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
-  title: 'Chess Pizza',
+  title: {
+    default: 'Chess Pizza',
+    template: '%s | Chess Pizza',
+  },
   description: 'Chess pizza app',
 };
 
@@ -24,11 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${nunito.variable}`}>
-        <Header />
-
-        <main className="min-h-screen">{children}</main>
-      </body>
+      <body className={`${nunito.variable}`}>{children}</body>
     </html>
   );
 }
