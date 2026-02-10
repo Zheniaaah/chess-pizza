@@ -8,8 +8,8 @@ interface IProps {
   name: string;
   price: number;
   imageUrl: string;
+  onClick: () => void;
   isActive?: boolean;
-  onClick?: () => void;
   className?: string;
 }
 

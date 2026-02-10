@@ -28,11 +28,13 @@ export function usePizzaOptions(
   const [selectedIngredients, { toggle: toggleIngredient }] = useSet(new Set<number>([]));
 
   const textDetails = (() => {
-    const textSize = `${selectedSize} см,`;
+    const textSize = `${selectedSize} см`;
     const textDough = `${DOUGH.find((d) => d.value === selectedDough)?.name} тісто`;
-    const textIngredients = `${selectedIngredients.size ? `, доп. інгредіенти (${selectedIngredients.size})` : ''}`;
+    const textIngredients = selectedIngredients.size
+      ? `, доп. інгредіенти (${selectedIngredients.size})`
+      : '';
 
-    return `${textSize} ${textDough}${textIngredients}`;
+    return `${textSize}, ${textDough}${textIngredients}`;
   })();
 
   const availableSizes = useMemo(() => {

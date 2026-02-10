@@ -18,7 +18,7 @@ export default async function ProductPage({ params }: IProps) {
 
   return (
     <Container className="my-10 flex">
-      <ProductImage src={product.imageUrl} alt={product.name} size={30} className="" />
+      <ProductImage src={product.imageUrl} alt={product.name} size={30} />
 
       <div className="w-[490px] bg-[#F4F1EE] p-7">
         <Title size="md" className="font-extrabold">

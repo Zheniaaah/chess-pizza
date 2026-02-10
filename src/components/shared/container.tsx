@@ -6,6 +6,6 @@ interface IProps extends React.PropsWithChildren {
   className?: string;
 }
 
-export default function Container({ className, children }: IProps) {
+export default function Container({ children, className }: IProps) {
   return <div className={cn('mx-auto max-w-7xl', className)}>{children}</div>;
 }

@@ -6,4 +6,5 @@ export * from './input';
 export * from './popover';
 export * from './range-slider';
 export * from './select';
+export * from './sheet';
 export * from './skeleton';

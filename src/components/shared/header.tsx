@@ -1,4 +1,4 @@
-import { ArrowRight, ShoppingCart, User } from 'lucide-react';
+import { User } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -6,6 +6,7 @@ import React from 'react';
 import { Button } from '@/components/ui';
 import { cn } from '@/utils';
 
+import CartButton from './cart-button';
 import Container from './container';
 import SearchInput from './search-input';
 
@@ -39,22 +40,7 @@ export default function Header({ className }: IProps) {
             Увійти
           </Button>
 
-          <Button className="group relative rounded-2xl">
-            <b>520 ₴</b>
-
-            <span className="mx-3 h-full w-px bg-white/30" />
-
-            <div className="flex items-center gap-1 transition duration-300 group-hover:opacity-0">
-              <ShoppingCart size={16} className="relative" strokeWidth={2} />
-
-              <b>3</b>
-            </div>
-
-            <ArrowRight
-              size={20}
-              className="absolute right-5 -translate-x-2 opacity-0 transition duration-300 group-hover:translate-x-0 group-hover:opacity-100"
-            />
-          </Button>
+          <CartButton />
         </div>
       </Container>
     </header>
