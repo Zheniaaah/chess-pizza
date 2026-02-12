@@ -4,21 +4,32 @@ import { Trash2Icon } from 'lucide-react';
 import Image from 'next/image';
 import React from 'react';
 
-import { cn, getCartItemTextDetails } from '@/utils';
+import { cn } from '@/utils';
 
 import CountButtons from './count-buttons';
 
 interface IProps {
-  id: number;
   name: string;
   quantity: number;
-  imageUrl: string;
   price: number;
+  imageUrl: string;
+  details: { textDetails: string; textIngredients: string | null };
+  handleUpdateQuantity: (type: 'plus' | 'minus') => void;
+  handleRemoveItem: () => void;
   className?: string;
 }
 
-export default function CartDrawerItem({ id, name, quantity, imageUrl, price, className }: IProps) {
-  const { textDetails, textIngredients } = getCartItemTextDetails(20, 'thin', []);
+export default function CartDrawerItem({
+  name,
+  quantity,
+  price,
+  imageUrl,
+  details,
+  handleUpdateQuantity,
+  handleRemoveItem,
+  className,
+}: IProps) {
+  const { textDetails, textIngredients } = details;
 
   return (
     <div className={cn('relative flex gap-6 rounded-2xl bg-white p-5 shadow-xs', className)}>
@@ -34,14 +45,14 @@ export default function CartDrawerItem({ id, name, quantity, imageUrl, price, cl
         <hr className="my-3" />
 
         <div className="flex items-center justify-between">
-          <CountButtons value={quantity} onClick={(type) => console.log(type)} />
+          <CountButtons value={quantity} onClick={handleUpdateQuantity} />
 
           <span className="font-bold">{price} ₴</span>
         </div>
       </div>
 
       <Trash2Icon
-        onClick={() => console.log('deleted')}
+        onClick={handleRemoveItem}
         className="hover:text-primary absolute top-5 right-5 size-5 cursor-pointer"
       />
     </div>

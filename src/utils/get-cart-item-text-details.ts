@@ -1,7 +1,5 @@
-import type { Ingredient } from '@prisma/client';
-
 import { DOUGH, SIZES } from '@/constants';
-import type { TDough, TSize } from '@/types';
+import type { ICartItem, TDough, TSize } from '@/types';
 
 interface IReturn {
   textDetails: string;
@@ -9,10 +7,12 @@ interface IReturn {
 }
 
 export function getCartItemTextDetails(
-  size: TSize,
-  dough: TDough,
-  ingredients?: Ingredient[],
+  size: TSize | null,
+  dough: TDough | null,
+  ingredients?: ICartItem['ingredients'],
 ): IReturn {
+  if (!size || !dough) return { textDetails: '', textIngredients: null };
+
   const textSize = `${SIZES.find((s) => s.value === size)?.name} ${size} см`;
   const textDough = `${DOUGH.find((d) => d.value === dough)?.name} тісто`;
   const textIngredients = [];
@@ -23,6 +23,6 @@ export function getCartItemTextDetails(
 
   return {
     textDetails: `${textSize}, ${textDough}`,
-    textIngredients: textIngredients.length ? `+ ${textIngredients}` : null,
+    textIngredients: textIngredients.length ? `+ ${textIngredients.join(', ')}` : null,
   };
 }

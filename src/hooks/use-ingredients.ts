@@ -20,7 +20,7 @@ export function useIngredients(): IReturn {
     (async () => {
       try {
         setLoading(true);
-        const response = await api.ingredients.getAll();
+        const response = await api.ingredients.fetchAll();
 
         const formatedIngredients: IIngredientItem[] = response.map((ingredient) => ({
           value: String(ingredient.id),

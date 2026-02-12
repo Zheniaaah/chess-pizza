@@ -1,13 +1,13 @@
 'use client';
 
-import type { Ingredient, ProductVariation } from '@prisma/client';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import React from 'react';
 
 import { Button, DialogDescription, DialogTitle } from '@/components/ui';
 import { DOUGH } from '@/constants';
 import { usePizzaOptions } from '@/hooks';
-import type { TDough, TSize } from '@/types';
+import { useCartStore } from '@/store/cart';
+import type { TDough, TProductWithRelations, TSize } from '@/types';
 import { cn } from '@/utils';
 
 import IngredientCard from './ingredient-card';
@@ -16,22 +16,19 @@ import Title from './title';
 import VariantsGroup from './variants-group';
 
 interface IProps {
-  name: string;
-  imageUrl: string;
-  variations?: ProductVariation[];
-  ingredients?: Ingredient[];
-  onAddToCart?: () => void;
+  product: TProductWithRelations;
   className?: string;
 }
 
-export default function ProductForm({
-  variations,
-  ingredients,
-  name,
-  imageUrl,
-  onAddToCart,
-  className,
-}: IProps) {
+export default function ProductForm({ product, className }: IProps) {
+  const addCartItem = useCartStore((state) => state.addCartItem);
+
+  const firstVariation = product.variations[0];
+  const isPizza = Boolean(firstVariation.dough);
+  const { variations, ingredients } = isPizza
+    ? product
+    : { variations: undefined, ingredients: undefined };
+
   const {
     selectedSize,
     setSelectedSize,
@@ -41,21 +38,26 @@ export default function ProductForm({
     toggleIngredient,
     textDetails,
     availableSizes,
+    selectedVariationId,
     totalPizzaPrice,
   } = usePizzaOptions(variations, ingredients);
 
   const handleClickAdd = () => {
-    onAddToCart?.();
-    console.log({
-      selectedSize,
-      selectedDough,
-      selectedIngredients,
+    addCartItem({
+      productVariationId: selectedVariationId ? selectedVariationId : firstVariation.id,
+      ingredientsIds: Array.from(selectedIngredients).length
+        ? Array.from(selectedIngredients)
+        : undefined,
     });
   };
 
   return (
     <div className={cn('flex', className)}>
-      <ProductImage src={imageUrl} alt={name} size={variations ? selectedSize : undefined} />
+      <ProductImage
+        src={product.imageUrl}
+        alt={product.name}
+        size={variations ? selectedSize : undefined}
+      />
 
       <div className="flex w-[490px] flex-col bg-[#F4F1EE] p-7">
         <VisuallyHidden>
@@ -64,7 +66,7 @@ export default function ProductForm({
         </VisuallyHidden>
 
         <Title size="md" className="font-extrabold">
-          {name}
+          {product.name}
         </Title>
 
         <p className="mt-1 text-gray-400">{textDetails}</p>
@@ -101,7 +103,7 @@ export default function ProductForm({
         )}
 
         <Button onClick={handleClickAdd} className="mt-auto h-14 w-full rounded-2xl px-10">
-          Додати у кошик за {totalPizzaPrice} ₴
+          Додати у кошик за {totalPizzaPrice || firstVariation.price} ₴
         </Button>
       </div>
     </div>

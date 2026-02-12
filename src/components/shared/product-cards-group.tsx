@@ -3,6 +3,7 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useRef } from 'react';
 import { useIntersection } from 'react-use';
+import { useShallow } from 'zustand/react/shallow';
 
 import { useCategoryStore } from '@/store';
 import { cn } from '@/utils';
@@ -28,8 +29,12 @@ export default function ProductCardsGroup({
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const activeCategoryId = useCategoryStore((state) => state.activeId);
-  const setActiveCategoryId = useCategoryStore((state) => state.setActiveId);
+  const { activeId, setActiveId } = useCategoryStore(
+    useShallow((state) => ({
+      activeId: state.activeId,
+      setActiveId: state.setActiveId,
+    })),
+  );
   const intersectionRef = useRef<HTMLDivElement>(null!);
 
   const intersection = useIntersection(intersectionRef, {
@@ -38,8 +43,8 @@ export default function ProductCardsGroup({
   });
 
   useEffect(() => {
-    if (intersection?.isIntersecting && activeCategoryId !== categoryId) {
-      setActiveCategoryId(categoryId);
+    if (intersection?.isIntersecting && activeId !== categoryId) {
+      setActiveId(categoryId);
 
       const queryString = searchParams.toString();
       const url = queryString ? `${pathname}?${queryString}#${title}` : `${pathname}#${title}`;
@@ -48,8 +53,8 @@ export default function ProductCardsGroup({
     }
   }, [
     intersection?.isIntersecting,
-    activeCategoryId,
-    setActiveCategoryId,
+    activeId,
+    setActiveId,
     categoryId,
     searchParams,
     title,

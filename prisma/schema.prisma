@@ -99,7 +99,7 @@ model Ingredient {
 model Cart {
   id Int @id @default(autoincrement())
 
-  token       String
+  token       String @unique
   totalAmount Int    @default(0) @map("total_amount")
 
   user   User? @relation(fields: [userId], references: [id])
@@ -116,7 +116,7 @@ model Cart {
 model CartItem {
   id Int @id @default(autoincrement())
 
-  quantity Int
+  quantity Int @default(1)
 
   cart   Cart @relation(fields: [cartId], references: [id])
   cartId Int  @map("cart_id")
@@ -135,7 +135,7 @@ model CartItem {
 model Order {
   id Int @id @default(autoincrement())
 
-  token       String
+  token       String      @unique
   items       Json
   totalAmount Int         @map("total_amount")
   fullName    String      @map("full_name")

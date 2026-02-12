@@ -1,6 +1,8 @@
-import type { Ingredient, Product, ProductVariation } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 
-export interface IProductWithRelations extends Product {
-  ingredients: Ingredient[];
-  variations: ProductVariation[];
-}
+import { cartQueryArgs, productQueryArgs } from '@/queries';
+
+export type TProductWithRelations = Prisma.ProductGetPayload<typeof productQueryArgs>;
+
+export type TCartWithRelations = Prisma.CartGetPayload<typeof cartQueryArgs>;
+export type TCartItemWithRelations = TCartWithRelations['items'][number];

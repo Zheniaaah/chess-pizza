@@ -16,6 +16,7 @@ interface IReturn {
   toggleIngredient: (value: number) => void;
   textDetails: string;
   availableSizes: IVariant[];
+  selectedVariationId: number | undefined;
   totalPizzaPrice: number;
 }
 
@@ -62,6 +63,12 @@ export function usePizzaOptions(
     }
   }, [availableSizes, selectedSize, setSelectedSize]);
 
+  const selectedVariationId = variations
+    ? variations.find(
+        (variation) => variation.size === selectedSize && variation.dough === selectedDough,
+      )?.id
+    : undefined;
+
   const totalPizzaPrice = calcPizzaPrice(
     variations,
     ingredients,
@@ -79,6 +86,7 @@ export function usePizzaOptions(
     toggleIngredient,
     textDetails,
     availableSizes,
+    selectedVariationId,
     totalPizzaPrice,
   };
 }

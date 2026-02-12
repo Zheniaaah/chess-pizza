@@ -4,20 +4,18 @@ import { useRouter } from 'next/navigation';
 import React from 'react';
 
 import { Dialog, DialogContent } from '@/components/ui';
-import type { IProductWithRelations } from '@/types';
+import type { TProductWithRelations } from '@/types';
 import { cn } from '@/utils';
 
 import ProductForm from '../product-form';
 
 interface IProps {
-  product: IProductWithRelations;
+  product: TProductWithRelations;
   className?: string;
 }
 
 export default function ProductModal({ product, className }: IProps) {
   const router = useRouter();
-
-  const isPizza = Boolean(product.variations[0].dough);
 
   return (
     <Dialog open={Boolean(product)} onOpenChange={() => router.back()}>
@@ -27,12 +25,7 @@ export default function ProductModal({ product, className }: IProps) {
           className,
         )}
       >
-        <ProductForm
-          ingredients={isPizza ? product.ingredients : undefined}
-          variations={isPizza ? product.variations : undefined}
-          name={product.name}
-          imageUrl={product.imageUrl}
-        />
+        <ProductForm product={product} />
       </DialogContent>
     </Dialog>
   );
