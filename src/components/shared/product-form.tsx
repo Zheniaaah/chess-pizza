@@ -1,7 +1,10 @@
 'use client';
 
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
+import { useRouter } from 'next/navigation';
 import React from 'react';
+import toast from 'react-hot-toast';
+import { useShallow } from 'zustand/react/shallow';
 
 import { Button, DialogDescription, DialogTitle } from '@/components/ui';
 import { DOUGH } from '@/constants';
@@ -21,7 +24,13 @@ interface IProps {
 }
 
 export default function ProductForm({ product, className }: IProps) {
-  const addCartItem = useCartStore((state) => state.addCartItem);
+  const router = useRouter();
+  const { loading, addCartItem } = useCartStore(
+    useShallow((state) => ({
+      loading: state.loading,
+      addCartItem: state.addCartItem,
+    })),
+  );
 
   const firstVariation = product.variations[0];
   const isPizza = Boolean(firstVariation.dough);
@@ -42,13 +51,20 @@ export default function ProductForm({ product, className }: IProps) {
     totalPizzaPrice,
   } = usePizzaOptions(variations, ingredients);
 
-  const handleClickAdd = () => {
-    addCartItem({
-      productVariationId: selectedVariationId ? selectedVariationId : firstVariation.id,
-      ingredientsIds: Array.from(selectedIngredients).length
-        ? Array.from(selectedIngredients)
-        : undefined,
-    });
+  const handleClickAdd = async () => {
+    try {
+      await addCartItem({
+        productVariationId: selectedVariationId || firstVariation.id,
+        ingredientsIds: Array.from(selectedIngredients).length
+          ? Array.from(selectedIngredients)
+          : undefined,
+      });
+      toast.success('Товар успішно додано у кошик');
+      router.back();
+    } catch (e) {
+      console.error(e);
+      toast.error('Не вдалося додати товар у кошик');
+    }
   };
 
   return (
@@ -102,7 +118,11 @@ export default function ProductForm({ product, className }: IProps) {
           </>
         )}
 
-        <Button onClick={handleClickAdd} className="mt-auto h-14 w-full rounded-2xl px-10">
+        <Button
+          loading={loading}
+          onClick={handleClickAdd}
+          className="mt-auto h-14 w-full rounded-2xl px-10"
+        >
           Додати у кошик за {totalPizzaPrice || firstVariation.price} ₴
         </Button>
       </div>

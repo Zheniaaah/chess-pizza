@@ -1,8 +1,12 @@
+'use client';
+
 import { ArrowRight, ShoppingCart } from 'lucide-react';
 import React from 'react';
+import { useShallow } from 'zustand/react/shallow';
 
 import { Button } from '@/components/ui';
-import { cn } from '@/utils';
+import { useCartStore } from '@/store/cart';
+import { calcTotalQuantity, cn } from '@/utils';
 
 import CartDrawer from './cart-drawer';
 
@@ -11,17 +15,30 @@ interface IProps {
 }
 
 export default function CartButton({ className }: IProps) {
+  const { totalAmount, items, loading } = useCartStore(
+    useShallow((state) => ({
+      totalAmount: state.totalAmount,
+      items: state.items,
+      loading: state.loading,
+    })),
+  );
+
+  const totalQuantity = calcTotalQuantity(items);
+
   return (
     <CartDrawer>
-      <Button className={cn('group relative rounded-2xl', className)}>
-        <b>520 ₴</b>
+      <Button
+        loading={loading}
+        className={cn('group relative rounded-2xl', loading && 'w-27', className)}
+      >
+        <b>{totalAmount} ₴</b>
 
         <span className="mx-3 h-full w-px bg-white/30" />
 
         <div className="flex items-center gap-1 transition duration-300 group-hover:opacity-0">
           <ShoppingCart size={16} className="relative" strokeWidth={2} />
 
-          <b>3</b>
+          <b>{totalQuantity}</b>
         </div>
 
         <ArrowRight

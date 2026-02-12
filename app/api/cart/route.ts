@@ -34,13 +34,28 @@ export async function POST(request: NextRequest) {
 
     const data = (await request.json()) as ICartItemCreate;
 
-    const cartItem = await prisma.cartItem.findFirst({
+    const cartItems = await prisma.cartItem.findMany({
       where: {
         cartId: cart.id,
         productVariationId: data.productVariationId,
-        ingredients: { every: { id: { in: data.ingredientsIds } } },
+      },
+      include: {
+        ingredients: true,
       },
     });
+
+    const ingredientsIds = data.ingredientsIds?.sort() || [];
+
+    const cartItem = cartItems.find((item) => {
+      const cartItemIngredientsIds = item.ingredients.map((ingredient) => ingredient.id).sort();
+
+      return (
+        ingredientsIds.length === cartItemIngredientsIds.length &&
+        cartItemIngredientsIds.every((id, i) => id === ingredientsIds[i])
+      );
+    });
+
+    console.log(cartItem);
 
     if (cartItem) {
       await prisma.cartItem.update({

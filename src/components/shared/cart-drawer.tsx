@@ -16,7 +16,7 @@ import {
   SheetTrigger,
 } from '@/components/ui';
 import { useCartStore } from '@/store/cart';
-import { getCartItemTextDetails } from '@/utils';
+import { calcTotalQuantity, getCartItemTextDetails } from '@/utils';
 
 export default function CartDrawer({ children }: React.PropsWithChildren) {
   const { totalAmount, items, fetchCart, updateCartItemQuantity, removeCartItem } = useCartStore(
@@ -29,7 +29,7 @@ export default function CartDrawer({ children }: React.PropsWithChildren) {
     })),
   );
 
-  const totalQuantity = items.reduce((acc, item) => acc + item.quantity, 0);
+  const totalQuantity = calcTotalQuantity(items);
 
   useEffect(() => {
     fetchCart();

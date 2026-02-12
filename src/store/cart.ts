@@ -15,7 +15,7 @@ interface IState {
   removeCartItem: (id: number) => Promise<void>;
 }
 
-export const useCartStore = create<IState>()((set, get) => {
+export const useCartStore = create<IState>()((set) => {
   const withLoading = async (apiCall: () => Promise<TCartWithRelations>) => {
     try {
       set({ loading: true, error: false });
@@ -24,6 +24,7 @@ export const useCartStore = create<IState>()((set, get) => {
     } catch (e) {
       set({ error: true });
       console.error(e);
+      throw e;
     } finally {
       set({ loading: false });
     }
