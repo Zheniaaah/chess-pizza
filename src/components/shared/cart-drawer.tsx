@@ -19,15 +19,17 @@ import { useCartStore } from '@/store/cart';
 import { calcTotalQuantity, getCartItemTextDetails } from '@/utils';
 
 export default function CartDrawer({ children }: React.PropsWithChildren) {
-  const { totalAmount, items, fetchCart, updateCartItemQuantity, removeCartItem } = useCartStore(
-    useShallow((state) => ({
-      totalAmount: state.totalAmount,
-      items: state.items,
-      fetchCart: state.fetchCart,
-      updateCartItemQuantity: state.updateCartItemQuantity,
-      removeCartItem: state.removeCartItem,
-    })),
-  );
+  const { totalAmount, items, loading, fetchCart, updateCartItemQuantity, removeCartItem } =
+    useCartStore(
+      useShallow((state) => ({
+        totalAmount: state.totalAmount,
+        items: state.items,
+        loading: state.loading,
+        fetchCart: state.fetchCart,
+        updateCartItemQuantity: state.updateCartItemQuantity,
+        removeCartItem: state.removeCartItem,
+      })),
+    );
 
   const totalQuantity = calcTotalQuantity(items);
 
@@ -81,7 +83,7 @@ export default function CartDrawer({ children }: React.PropsWithChildren) {
           </div>
 
           <Link href="/cart">
-            <Button type="submit" className="h-12 w-full text-base">
+            <Button type="submit" loading={loading} className="h-12 w-full text-base">
               Оформити замовлення
               <ArrowRight className="ml-2 w-5" />
             </Button>

@@ -69,10 +69,7 @@ export async function POST(request: NextRequest) {
 
       const updatedCart = await updateCartTotalAmount(token);
 
-      const response = NextResponse.json(updatedCart);
-      response.cookies.set('cartToken', token);
-
-      return response;
+      return NextResponse.json(updatedCart);
     }
 
     await prisma.cartItem.create({
@@ -80,14 +77,17 @@ export async function POST(request: NextRequest) {
         cartId: cart.id,
         productVariationId: data.productVariationId,
         ingredients: {
-          connect: data.ingredientsIds?.map((id) => ({ id })),
+          connect: ingredientsIds.map((id) => ({ id })),
         },
       },
     });
 
     const updatedCart = await updateCartTotalAmount(token);
 
-    return NextResponse.json(updatedCart);
+    const response = NextResponse.json(updatedCart);
+    response.cookies.set('cartToken', token);
+
+    return response;
   } catch (e) {
     console.error('[CART_POST] Server error: ', e);
     return NextResponse.json({ message: 'Не вдалося створити кошик' }, { status: 500 });

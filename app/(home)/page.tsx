@@ -1,3 +1,5 @@
+import { Suspense } from 'react';
+
 import { Container, Filters, ProductCardsGroup, Title, TopBar } from '@/components/shared';
 import { prisma } from '@/lib';
 
@@ -26,20 +28,23 @@ export default async function HomePage() {
       <Container className="mt-10 pb-14">
         <div className="flex gap-20">
           <div className="w-[250px]">
-            <Filters />
+            <Suspense fallback={null}>
+              <Filters />
+            </Suspense>
           </div>
 
           <div className="flex flex-1 flex-col gap-16">
             {categories.map(
               (category) =>
                 category.products.length && (
-                  <ProductCardsGroup
-                    key={category.id}
-                    title={category.name}
-                    products={category.products}
-                    categoryId={category.id}
-                    className="scroll-mt-28"
-                  />
+                  <Suspense key={category.id} fallback={null}>
+                    <ProductCardsGroup
+                      title={category.name}
+                      products={category.products}
+                      categoryId={category.id}
+                      className="scroll-mt-28"
+                    />
+                  </Suspense>
                 ),
             )}
           </div>

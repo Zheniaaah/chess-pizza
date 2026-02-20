@@ -15,9 +15,7 @@ export async function updateCartTotalAmount(token: string) {
 
   return prisma.cart.update({
     where: { token },
-    data: {
-      totalAmount,
-    },
+    data: { totalAmount },
     ...cartQueryArgs,
   });
 }

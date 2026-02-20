@@ -1,5 +1,5 @@
 import type { Category } from '@prisma/client';
-import React from 'react';
+import React, { Suspense } from 'react';
 
 import { cn } from '@/utils';
 
@@ -16,7 +16,9 @@ export default async function TopBar({ categories, className }: IProps) {
   return (
     <div className={cn('sticky top-0 z-10 bg-white py-5 shadow-lg shadow-black/5', className)}>
       <Container className="flex items-center justify-between">
-        <Categories categories={categories} />
+        <Suspense fallback={null}>
+          <Categories categories={categories} />
+        </Suspense>
 
         <SortPopup />
       </Container>
